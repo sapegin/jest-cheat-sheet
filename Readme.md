@@ -76,3 +76,17 @@ it('should call the callback', () => {
 
 * [Jest site](https://facebook.github.io/jest/)
 * [Testing React components with Jest and Enzyme](http://blog.sapegin.me/all/react-jest)
+
+## You may also like
+
+* [Opinionated list of React components](https://github.com/sapegin/react-components)
+
+## Contributing
+
+Improvements are welcome! Open an issue or send a pull request.
+
+## Author and license
+
+[Artem Sapegin](http://sapegin.me/), a frontend developer at [Here](https://here.com/en) and the creator of [React Styleguidist](https://github.com/styleguidist/react-styleguidist). I also write about frontend at [my blog](http://blog.sapegin.me/).
+
+CC0 1.0 Universal license, see the included [License.md](/License.md) file.
