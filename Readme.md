@@ -72,6 +72,22 @@ it('should call the callback', () => {
 
 [Mock functions docs](https://facebook.github.io/jest/docs/mock-function-api.html)
 
+## Mock modules
+
+1. Create a file like `__mocks__/lodash/memoize.js`:
+
+```js
+module.exports = a => a;
+```
+
+2. Add to your test:
+
+```js
+jest.mock('lodash/memoize');
+```
+
+[Manual mocks docs](https://facebook.github.io/jest/docs/manual-mocks.html)
+
 ## Resources
 
 * [Jest site](https://facebook.github.io/jest/)
