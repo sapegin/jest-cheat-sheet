@@ -76,15 +76,15 @@ it('should call the callback', () => {
 
 1. Create a file like `__mocks__/lodash/memoize.js`:
 
-```js
-module.exports = a => a;
-```
+   ```js
+   module.exports = a => a;
+   ```
 
 2. Add to your test:
 
-```js
-jest.mock('lodash/memoize');
-```
+   ```js
+   jest.mock('lodash/memoize');
+   ```
 
 [Manual mocks docs](https://facebook.github.io/jest/docs/manual-mocks.html)
 
