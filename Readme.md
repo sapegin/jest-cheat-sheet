@@ -28,6 +28,8 @@ expect(7).toBeDefined()
 expect('long string').toMatch('str')
 expect(result).toMatch(/regexp/)
 
+expect(() => {}).toEqual(expect.any(Function));
+
 expect({a: 1, b: 2}).toMatchObject({a: 1})
 
 expect(2).toBeGreaterThan(1)
