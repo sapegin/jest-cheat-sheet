@@ -78,7 +78,7 @@ it('should call the callback', () => {
 
 ```js
 jest.mock('lodash/memoize', () => a => a); // The original lodash/memoize should exist
-jest.mock('lodash/memoize', () => a => a, { virtual: true });  // 
+jest.mock('lodash/memoize', () => a => a, { virtual: true });  // The original lodash/memoize isn’t required
 ```
 
 [jest.mock docs](https://facebook.github.io/jest/docs/jest-object.html#jestmockmodulename-factory-options)
