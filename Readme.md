@@ -74,7 +74,18 @@ it('should call the callback', () => {
 
 [Mock functions docs](https://facebook.github.io/jest/docs/mock-function-api.html)
 
-## Mock modules
+## Mock modules using `jest.mock` method
+
+```js
+jest.mock('lodash/memoize', () => a => a); // The original lodash/memoize should exist
+jest.mock('lodash/memoize', () => a => a, { virtual: true });  // 
+```
+
+[jest.mock docs](https://facebook.github.io/jest/docs/jest-object.html#jestmockmodulename-factory-options)
+
+> Note: When using `babel-jest`, calls to `jest.mock` will automatically be hoisted to the top of the code block. Use `jest.doMock` if you want to explicitly avoid this behavior.
+
+## Mock modules using a mock file
 
 1. Create a file like `__mocks__/lodash/memoize.js`:
 
@@ -87,6 +98,8 @@ it('should call the callback', () => {
    ```js
    jest.mock('lodash/memoize');
    ```
+
+> Note: When using `babel-jest`, calls to `jest.mock` will automatically be hoisted to the top of the code block. Use `jest.doMock` if you want to explicitly avoid this behavior.
 
 [Manual mocks docs](https://facebook.github.io/jest/docs/manual-mocks.html)
 
