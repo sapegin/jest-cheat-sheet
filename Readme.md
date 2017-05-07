@@ -61,6 +61,27 @@ expect(fn).toHaveBeenLastCalledWith(expect.anything())
 
 [Matchers docs](https://facebook.github.io/jest/docs/expect.html)
 
+## Promise matchers (Jest 20+)
+
+```js
+it('should resolve to lemon', () => {
+  // Make sure to add a return statement
+  return expect(Promise.resolve('lemon')).resolves.toBe('lemon');
+  // return expect(Promise.reject('octopus')).rejects.toBeDefined();
+});
+```
+
+Or with async/await:
+
+```js
+it('shoul resolve to lemon', async () => {
+  await expect(Promise.resolve('lemon')).resolves.toBe('lemon');
+  await expect(Promise.resolve('lemon')).resolves.not.toBe('octopus');
+});
+```
+
+[resolves docs](https://facebook.github.io/jest/docs/en/expect.html#resolves)
+
 ## Mock functions
 
 ```js
