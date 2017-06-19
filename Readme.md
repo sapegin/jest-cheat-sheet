@@ -51,6 +51,7 @@ expect(fn).toThrow()
 expect(fn).toThrow('Out of cheese')
 expect(fn).toThrowErrorMatchingSnapshot()
 
+fn.mockClear(); // Clear number of calls
 expect(fn).toBeCalled()
 expect(fn).toHaveBeenCalledTimes(1)
 expect(fn).toBeCalledWith(expect.stringContaining('foo'))
