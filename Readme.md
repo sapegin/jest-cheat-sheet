@@ -94,6 +94,12 @@ it('should call the callback', () => {
 });
 ```
 
+You can also pass an implementation to `jest.fn` function:
+
+```js
+const callback = jest.fn(() => true);
+```
+
 [Mock functions docs](https://facebook.github.io/jest/docs/mock-function-api.html)
 
 ## Mock modules using `jest.mock` method
