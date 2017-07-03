@@ -66,6 +66,7 @@ expect(fn).toHaveBeenLastCalledWith(expect.anything())
 
 ```js
 it('should resolve to lemon', () => {
+  expect.assertions(1);
   // Make sure to add a return statement
   return expect(Promise.resolve('lemon')).resolves.toBe('lemon');
   // return expect(Promise.reject('octopus')).rejects.toBeDefined();
@@ -76,6 +77,7 @@ Or with async/await:
 
 ```js
 it('shoul resolve to lemon', async () => {
+  expect.assertions(2);
   await expect(Promise.resolve('lemon')).resolves.toBe('lemon');
   await expect(Promise.resolve('lemon')).resolves.not.toBe('octopus');
 });
