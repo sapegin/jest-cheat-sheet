@@ -26,7 +26,8 @@ expect(undefined).toBeUndefined()
 expect(7).toBeDefined()
 
 expect('long string').toMatch('str')
-expect(result).toMatch(/regexp/)
+expect('coffee').toMatch(/regexp/)
+expect('pizza').not.toMatch('coffee')
 
 expect(() => {}).toEqual(expect.any(Function));
 
