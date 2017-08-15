@@ -29,7 +29,7 @@ expect('long string').toMatch('str')
 expect('coffee').toMatch(/regexp/)
 expect('pizza').not.toMatch('coffee')
 
-expect(() => {}).toEqual(expect.any(Function));
+expect(() => {}).toEqual(expect.any(Function))
 
 expect({a: 1, b: 2}).toMatchObject({a: 1})
 
@@ -52,13 +52,14 @@ expect(fn).toThrow()
 expect(fn).toThrow('Out of cheese')
 expect(fn).toThrowErrorMatchingSnapshot()
 
-fn.mockClear(); // Clear number of calls
+fn.mockClear() // Clear number of calls
 expect(fn).toBeCalled()
 expect(fn).toHaveBeenCalledTimes(1)
 expect(fn).toBeCalledWith(expect.stringContaining('foo'))
 expect(fn).toBeCalledWith(expect.stringMatching(/^[A-Z]\d+$/))
 expect(fn).toBeCalledWith(expect.objectContaining({x: expect.any(Number), y: expect.any(Number)}))
 expect(fn).toHaveBeenLastCalledWith(expect.anything())
+expect(fn.mock.calls[0][0](1)).toBe(2) // fn.mock.calls[0][0] — the first argument of the first call
 ```
 
 [Matchers docs](https://facebook.github.io/jest/docs/expect.html)
