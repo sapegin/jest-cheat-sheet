@@ -53,12 +53,14 @@ expect(fn).toThrow('Out of cheese')
 expect(fn).toThrowErrorMatchingSnapshot()
 
 fn.mockClear() // Clear number of calls
-expect(fn).toBeCalled()
-expect(fn).toHaveBeenCalledTimes(1)
-expect(fn).toBeCalledWith(expect.stringContaining('foo'))
+expect(fn).toBeCalled() // Function was called
+expect(fn).not.toBeCalled() // Function was *not* called
+expect(fn).toHaveBeenCalledTimes(1) // Function was called only once
+expect(fn).toBeCalledWith(expect.stringContaining('foo')) // Any of calls was with these arguments
 expect(fn).toBeCalledWith(expect.stringMatching(/^[A-Z]\d+$/))
 expect(fn).toBeCalledWith(expect.objectContaining({x: expect.any(Number), y: expect.any(Number)}))
-expect(fn).toHaveBeenLastCalledWith(expect.anything())
+expect(fn).toHaveBeenLastCalledWith(expect.anything()) // Last call was with these arguments
+expect(install.mock.calls).toEqual([['first', 'call', 'args'], ['second', 'call', 'args']]) // Multiple calls
 expect(fn.mock.calls[0][0](1)).toBe(2) // fn.mock.calls[0][0] — the first argument of the first call
 ```
 
