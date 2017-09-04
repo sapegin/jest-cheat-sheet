@@ -60,7 +60,7 @@ expect(fn).toBeCalledWith(expect.stringContaining('foo')) // Any of calls was wi
 expect(fn).toBeCalledWith(expect.stringMatching(/^[A-Z]\d+$/))
 expect(fn).toBeCalledWith(expect.objectContaining({x: expect.any(Number), y: expect.any(Number)}))
 expect(fn).toHaveBeenLastCalledWith(expect.anything()) // Last call was with these arguments
-expect(install.mock.calls).toEqual([['first', 'call', 'args'], ['second', 'call', 'args']]) // Multiple calls
+expect(fn.mock.calls).toEqual([['first', 'call', 'args'], ['second', 'call', 'args']]) // Multiple calls
 expect(fn.mock.calls[0][0](1)).toBe(2) // fn.mock.calls[0][0] — the first argument of the first call
 ```
 
