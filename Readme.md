@@ -27,15 +27,20 @@ expect(undefined).toBeUndefined() // === undefined
 expect(7).toBeDefined() // !== undefined
 
 expect('long string').toMatch('str')
-expect('coffee').toMatch(/regexp/)
+expect('coffee').toMatch(/ff/)
 expect('pizza').not.toMatch('coffee')
+expect(['pizza', 'coffee']).toEqual([expect.stringContaining('zz'), expect.stringMatching(/ff/)])
 
+expect(new A()).toBeInstanceOf(A)
 expect(() => {}).toEqual(expect.any(Function))
+expect('pizza').toEqual(expect.anything())
 
 expect({a: 1}).toHaveProperty('a')
 expect({a: 1}).toHaveProperty('a', 1)
-expect({a: { b: 1 }}).toHaveProperty('a.b')
+expect({a: {b: 1}}).toHaveProperty('a.b')
 expect({a: 1, b: 2}).toMatchObject({a: 1})
+expect({a: 1, b: 2}).toMatchObject({a: expect.any(Number), b: expect.any(Number)})
+expect([{a: 1}, {b: 2}]).toEqual([expect.objectContaining({a: expect.any(Number)}), expect.anything()])
 
 expect(2).toBeGreaterThan(1)
 expect(1).toBeGreaterThanOrEqual(1)
@@ -48,23 +53,20 @@ expect(['Alice', 'Bob', 'Eve']).toContain('Alice')
 expect([{a: 1}, {a: 2}]).toContainEqual({a: 1})
 expect(['Alice', 'Bob', 'Eve']).toEqual(expect.arrayContaining(['Alice', 'Bob']))
 
-expect(new A()).toBeInstanceOf(A)
-
-expect(node).toMatchSnapshot()
-
+// const fn = () => { throw new Error('Out of cheese!') }
 expect(fn).toThrow()
 expect(fn).toThrow('Out of cheese')
 expect(fn).toThrowErrorMatchingSnapshot()
+
+expect(node).toMatchSnapshot()
 
 // const fn = jest.fn()
 fn.mockClear() // Clear number of calls
 expect(fn).toBeCalled() // Function was called
 expect(fn).not.toBeCalled() // Function was *not* called
 expect(fn).toHaveBeenCalledTimes(1) // Function was called only once
-expect(fn).toBeCalledWith(expect.stringContaining('foo')) // Any of calls was with these arguments
-expect(fn).toBeCalledWith(expect.stringMatching(/^[A-Z]\d+$/))
-expect(fn).toBeCalledWith(expect.objectContaining({x: expect.any(Number), y: expect.any(Number)}))
-expect(fn).toHaveBeenLastCalledWith(expect.anything()) // Last call was with these arguments
+expect(fn).toBeCalledWith('first arg', 'second arg') // Any of calls was with these arguments
+expect(fn).toHaveBeenLastCalledWith('first arg', 'secon arg') // Last call was with these arguments
 expect(fn.mock.calls).toEqual([['first', 'call', 'args'], ['second', 'call', 'args']]) // Multiple calls
 expect(fn.mock.calls[0][0](1)).toBe(2) // fn.mock.calls[0][0] — the first argument of the first call
 ```
