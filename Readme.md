@@ -151,7 +151,7 @@ jest.mock('lodash/memoize', () => a => a, { virtual: true });  // The original l
 
 [Manual mocks docs](https://facebook.github.io/jest/docs/manual-mocks.html)
 
-### Accessing the original funtion when using mocks
+### Accessing the original module when using mocks
 
 ```js
 jest.mock('fs')
