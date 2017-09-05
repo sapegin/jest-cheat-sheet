@@ -78,7 +78,7 @@ expect(fn.mock.calls[0][0](1)).toBe(2) // fn.mock.calls[0][0] — the first argu
 * `lastCalledWith` → `toHaveBeenLastCalledWith`
 * `toThrowError` → `toThrow`
 
-## Promise matchers (Jest 20+)
+### Promise matchers (Jest 20+)
 
 ```js
 it('should resolve to lemon', () => {
@@ -101,7 +101,9 @@ it('shoul resolve to lemon', async () => {
 
 [resolves docs](https://facebook.github.io/jest/docs/en/expect.html#resolves)
 
-## Mock functions
+## Mocks
+
+### Mock functions
 
 ```js
 it('should call the callback', () => {
@@ -120,7 +122,7 @@ const callback = jest.fn(() => true);
 
 [Mock functions docs](https://facebook.github.io/jest/docs/mock-function-api.html)
 
-## Mock modules using `jest.mock` method
+### Mock modules using `jest.mock` method
 
 ```js
 jest.mock('lodash/memoize', () => a => a); // The original lodash/memoize should exist
@@ -131,7 +133,7 @@ jest.mock('lodash/memoize', () => a => a, { virtual: true });  // The original l
 
 > Note: When using `babel-jest`, calls to `jest.mock` will automatically be hoisted to the top of the code block. Use `jest.doMock` if you want to explicitly avoid this behavior.
 
-## Mock modules using a mock file
+### Mock modules using a mock file
 
 1. Create a file like `__mocks__/lodash/memoize.js`:
 
@@ -148,6 +150,14 @@ jest.mock('lodash/memoize', () => a => a, { virtual: true });  // The original l
 > Note: When using `babel-jest`, calls to `jest.mock` will automatically be hoisted to the top of the code block. Use `jest.doMock` if you want to explicitly avoid this behavior.
 
 [Manual mocks docs](https://facebook.github.io/jest/docs/manual-mocks.html)
+
+### Accessing the original funtion when using mocks
+
+```js
+jest.mock('fs')
+const fs = require('fs') // Mocked module
+const fs = require.requireActual('fs') // Original module
+```
 
 ## Resources
 
