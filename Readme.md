@@ -56,6 +56,7 @@ expect(fn).toThrow()
 expect(fn).toThrow('Out of cheese')
 expect(fn).toThrowErrorMatchingSnapshot()
 
+// const fn = jest.fn()
 fn.mockClear() // Clear number of calls
 expect(fn).toBeCalled() // Function was called
 expect(fn).not.toBeCalled() // Function was *not* called
