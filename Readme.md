@@ -31,6 +31,9 @@ expect('pizza').not.toMatch('coffee')
 
 expect(() => {}).toEqual(expect.any(Function))
 
+expect({a: 1}).toHaveProperty('a')
+expect({a: 1}).toHaveProperty('a', 1)
+expect({a: { b: 1 }}).toHaveProperty('a.b')
 expect({a: 1, b: 2}).toMatchObject({a: 1})
 
 expect(2).toBeGreaterThan(1)
