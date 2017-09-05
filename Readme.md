@@ -16,14 +16,14 @@ describe('makePoniesPink', () => {
 ```js
 expect.assertions(28)
 
-expect(42).toBe(42)
-expect(42).not.toBe(3)
-expect([1, 2]).toEqual([1, 2])
-expect('foo').toBeTruthy()
-expect('').toBeFalsy()
-expect(null).toBeNull()
-expect(undefined).toBeUndefined()
-expect(7).toBeDefined()
+expect(42).toBe(42) // ===
+expect(42).not.toBe(3) // !==
+expect([1, 2]).toEqual([1, 2]) // Deep equality
+expect('').toBeFalsy() // false, 0, '', null, undefined, NaN
+expect('foo').toBeTruthy() // Not false, 0, '', null, undefined, NaN
+expect(null).toBeNull() // === null
+expect(undefined).toBeUndefined() // === undefined
+expect(7).toBeDefined() // !== undefined
 
 expect('long string').toMatch('str')
 expect('coffee').toMatch(/regexp/)
