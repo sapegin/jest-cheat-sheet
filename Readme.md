@@ -71,6 +71,13 @@ expect(fn.mock.calls[0][0](1)).toBe(2) // fn.mock.calls[0][0] — the first argu
 
 [Matchers docs](https://facebook.github.io/jest/docs/expect.html)
 
+### Aliases
+
+* `toBeCalled` → `toHaveBeenCalled`
+* `toBeCalledWith` → `toHaveBeenCalledWith`
+* `lastCalledWith` → `toHaveBeenLastCalledWith`
+* `toThrowError` → `toThrow`
+
 ## Promise matchers (Jest 20+)
 
 ```js
