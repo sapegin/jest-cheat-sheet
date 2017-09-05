@@ -14,7 +14,8 @@ describe('makePoniesPink', () => {
 ## Matchers
 
 ```js
-expect.assertions(28)
+expect.assertions(28) // Exactly 28 assertions are called during a test
+expect.hasAssertions() // At least one assertion is called during a test
 
 expect(42).toBe(42) // ===
 expect(42).not.toBe(3) // !==
