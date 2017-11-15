@@ -4,7 +4,7 @@
 
 ```js
 describe('makePoniesPink', () => {
-  it('should make each pony pink', () => {
+  test('make each pony pink', () => {
     const actual = fn(['Alice', 'Bob', 'Eve']);
     expect(actual).toEqual(['Pink Alice', 'Pink Bob', 'Pink Eve']);
   });
@@ -83,7 +83,7 @@ expect(fn.mock.calls[0][0](1)).toBe(2) // fn.mock.calls[0][0] — the first argu
 ### Promise matchers (Jest 20+)
 
 ```js
-it('should resolve to lemon', () => {
+test('resolve to lemon', () => {
   expect.assertions(1);
   // Make sure to add a return statement
   return expect(Promise.resolve('lemon')).resolves.toBe('lemon');
@@ -94,7 +94,7 @@ it('should resolve to lemon', () => {
 Or with async/await:
 
 ```js
-it('shoul resolve to lemon', async () => {
+test('resolve to lemon', async () => {
   expect.assertions(2);
   await expect(Promise.resolve('lemon')).resolves.toBe('lemon');
   await expect(Promise.resolve('lemon')).resolves.not.toBe('octopus');
@@ -108,7 +108,7 @@ it('shoul resolve to lemon', async () => {
 ### Mock functions
 
 ```js
-it('should call the callback', () => {
+test('call the callback', () => {
   const callback = jest.fn();
   fn(callback);
   expect(callback).toBeCalled();
