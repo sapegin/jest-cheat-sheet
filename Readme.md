@@ -61,6 +61,7 @@ expect(fn).toThrowErrorMatchingSnapshot()
 expect(node).toMatchSnapshot()
 
 // const fn = jest.fn()
+// const fn = jest.fn().mockName('myMock') -- named mock, Jest 22+
 fn.mockClear() // Clear number of calls
 expect(fn).toBeCalled() // Function was called
 expect(fn).not.toBeCalled() // Function was *not* called
