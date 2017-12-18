@@ -1,16 +1,40 @@
 # Jest cheat sheet
 
-*I recommend [Mrm](https://github.com/sapegin/mrm-tasks/tree/master/packages/mrm-task-jest) and [jest-codemods](https://github.com/skovhus/jest-codemods) for single-command Jest installation and easy migration from other frameworks.*
+_I recommend [Mrm](https://github.com/sapegin/mrm-tasks/tree/master/packages/mrm-task-jest) and [jest-codemods](https://github.com/skovhus/jest-codemods) for single-command Jest installation and easy migration from other frameworks._
+
+<!-- To reformat run: npx prettier --print-width 70 --single-quote --no-semi --prose-wrap never --write Readme.md -->
+
+<!-- To update run: npx markdown-toc --maxdepth 3 -i Readme.md -->
+
+<!-- toc -->
+
+* [Basic test](#basic-test)
+* [Matchers](#matchers)
+  * [Aliases](#aliases)
+  * [Promise matchers (Jest 20+)](#promise-matchers-jest-20)
+* [Mocks](#mocks)
+  * [Mock functions](#mock-functions)
+  * [Mock modules using `jest.mock` method](#mock-modules-using-jestmock-method)
+  * [Mock modules using a mock file](#mock-modules-using-a-mock-file)
+  * [Accessing the original module when using mocks](#accessing-the-original-module-when-using-mocks)
+* [Testing modules with side effects](#testing-modules-with-side-effects)
+* [Usage with Babel and TypeScript](#usage-with-babel-and-typescript)
+* [Resources](#resources)
+* [You may also like](#you-may-also-like)
+* [Contributing](#contributing)
+* [Author and license](#author-and-license)
+
+<!-- tocstop -->
 
 ## Basic test
 
 ```js
 describe('makePoniesPink', () => {
   test('make each pony pink', () => {
-    const actual = fn(['Alice', 'Bob', 'Eve']);
-    expect(actual).toEqual(['Pink Alice', 'Pink Bob', 'Pink Eve']);
-  });
-});
+    const actual = fn(['Alice', 'Bob', 'Eve'])
+    expect(actual).toEqual(['Pink Alice', 'Pink Bob', 'Pink Eve'])
+  })
+})
 ```
 
 ## Matchers
@@ -37,12 +61,15 @@ expect(new A()).toBeInstanceOf(A)
 expect(() => {}).toEqual(expect.any(Function))
 expect('pizza').toEqual(expect.anything())
 
-expect({a: 1}).toHaveProperty('a')
-expect({a: 1}).toHaveProperty('a', 1)
-expect({a: {b: 1}}).toHaveProperty('a.b')
-expect({a: 1, b: 2}).toMatchObject({a: 1})
-expect({a: 1, b: 2}).toMatchObject({a: expect.any(Number), b: expect.any(Number)})
-expect([{a: 1}, {b: 2}]).toEqual([expect.objectContaining({a: expect.any(Number)}), expect.anything()])
+expect({ a: 1 }).toHaveProperty('a')
+expect({ a: 1 }).toHaveProperty('a', 1)
+expect({ a: { b: 1 } }).toHaveProperty('a.b')
+expect({ a: 1, b: 2 }).toMatchObject({ a: 1 })
+expect({ a: 1, b: 2 }).toMatchObject({
+  a: expect.any(Number),
+  b: expect.any(Number)
+})
+expect([{ a: 1 }, { b: 2 }]).toEqual([expect.objectContaining({ a: expect.any(Number) }), expect.anything()])
 
 expect(2).toBeGreaterThan(1)
 expect(1).toBeGreaterThanOrEqual(1)
@@ -52,7 +79,7 @@ expect(0.2 + 0.1).toBeCloseTo(0.3, 5)
 
 expect(['Alice', 'Bob', 'Eve']).toHaveLength(3)
 expect(['Alice', 'Bob', 'Eve']).toContain('Alice')
-expect([{a: 1}, {a: 2}]).toContainEqual({a: 1})
+expect([{ a: 1 }, { a: 2 }]).toContainEqual({ a: 1 })
 expect(['Alice', 'Bob', 'Eve']).toEqual(expect.arrayContaining(['Alice', 'Bob']))
 
 // const fn = () => { throw new Error('Out of cheese!') }
@@ -78,30 +105,30 @@ expect(fn.mock.calls[0][0](1)).toBe(2) // fn.mock.calls[0][0] — the first argu
 
 ### Aliases
 
-* `toBeCalled` → `toHaveBeenCalled`
-* `toBeCalledWith` → `toHaveBeenCalledWith`
+* `toBeCalled` → `toHaveBeenCalled`
+* `toBeCalledWith` → `toHaveBeenCalledWith`
 * `lastCalledWith` → `toHaveBeenLastCalledWith`
-* `toThrowError` → `toThrow`
+* `toThrowError` → `toThrow`
 
 ### Promise matchers (Jest 20+)
 
 ```js
 test('resolve to lemon', () => {
-  expect.assertions(1);
+  expect.assertions(1)
   // Make sure to add a return statement
-  return expect(Promise.resolve('lemon')).resolves.toBe('lemon');
+  return expect(Promise.resolve('lemon')).resolves.toBe('lemon')
   // return expect(Promise.reject('octopus')).rejects.toBeDefined();
-});
+})
 ```
 
 Or with async/await:
 
 ```js
 test('resolve to lemon', async () => {
-  expect.assertions(2);
-  await expect(Promise.resolve('lemon')).resolves.toBe('lemon');
-  await expect(Promise.resolve('lemon')).resolves.not.toBe('octopus');
-});
+  expect.assertions(2)
+  await expect(Promise.resolve('lemon')).resolves.toBe('lemon')
+  await expect(Promise.resolve('lemon')).resolves.not.toBe('octopus')
+})
 ```
 
 [resolves docs](https://facebook.github.io/jest/docs/en/expect.html#resolves)
@@ -112,17 +139,17 @@ test('resolve to lemon', async () => {
 
 ```js
 test('call the callback', () => {
-  const callback = jest.fn();
-  fn(callback);
-  expect(callback).toBeCalled();
-  expect(callback.mock.calls[0][1].baz).toBe('pizza'); // Second argument of the first call
-});
+  const callback = jest.fn()
+  fn(callback)
+  expect(callback).toBeCalled()
+  expect(callback.mock.calls[0][1].baz).toBe('pizza') // Second argument of the first call
+})
 ```
 
 You can also pass an implementation to `jest.fn` function:
 
 ```js
-const callback = jest.fn(() => true);
+const callback = jest.fn(() => true)
 ```
 
 [Mock functions docs](https://facebook.github.io/jest/docs/mock-function-api.html)
@@ -130,8 +157,8 @@ const callback = jest.fn(() => true);
 ### Mock modules using `jest.mock` method
 
 ```js
-jest.mock('lodash/memoize', () => a => a); // The original lodash/memoize should exist
-jest.mock('lodash/memoize', () => a => a, { virtual: true });  // The original lodash/memoize isn’t required
+jest.mock('lodash/memoize', () => a => a) // The original lodash/memoize should exist
+jest.mock('lodash/memoize', () => a => a, { virtual: true }) // The original lodash/memoize isn’t required
 ```
 
 [jest.mock docs](https://facebook.github.io/jest/docs/jest-object.html#jestmockmodulename-factory-options)
@@ -143,13 +170,13 @@ jest.mock('lodash/memoize', () => a => a, { virtual: true });  // The original l
 1. Create a file like `__mocks__/lodash/memoize.js`:
 
    ```js
-   module.exports = a => a;
+   module.exports = a => a
    ```
 
 2. Add to your test:
 
    ```js
-   jest.mock('lodash/memoize');
+   jest.mock('lodash/memoize')
    ```
 
 > Note: When using `babel-jest`, calls to `jest.mock` will automatically be hoisted to the top of the code block. Use `jest.doMock` if you want to explicitly avoid this behavior.
@@ -169,23 +196,23 @@ const fs = require.requireActual('fs') // Original module
 Node.js and Jest will cache modules you `require`. To test modules with side effects you’ll need to reset the module registry between tests:
 
 ```js
-const modulePath = '../module-to-test';
+const modulePath = '../module-to-test'
 
 afterEach(() => {
-	jest.resetModules();
-});
+  jest.resetModules()
+})
 
 test('first test', () => {
-	// Prepare conditions for the first test
-	const result = require(modulePath);
-	expect(result).toMatchSnapshot();
-});
+  // Prepare conditions for the first test
+  const result = require(modulePath)
+  expect(result).toMatchSnapshot()
+})
 
 test('second text', () => {
-	// Prepare conditions for the second test
-	const fn = () => require(modulePath);
-	expect(fn).toThrow();
-});
+  // Prepare conditions for the second test
+  const fn = () => require(modulePath)
+  expect(fn).toThrow()
+})
 ```
 
 ## Usage with Babel and TypeScript
@@ -205,7 +232,7 @@ Add [babel-jest](https://github.com/facebook/jest/tree/master/packages/babel-jes
 * [Testing with Jest: 15 Awesome Tips and Tricks](https://medium.com/@stipsan/testing-with-jest-15-awesome-tips-and-tricks-42150ec4c262) by Stian Didriksen
 * Taking Advantage of Jest Matchers by Ben McCormick: [Part 1](https://benmccormick.org/2017/08/15/jest-matchers-1/), [Part 2](https://benmccormick.org/2017/09/04/jest-matchers-2/)
 
-***
+---
 
 ## You may also like
 
