@@ -1,5 +1,7 @@
 # Jest cheat sheet
 
+*I recommend [Mrm](https://github.com/sapegin/mrm-tasks/tree/master/packages/mrm-task-jest) and [jest-codemods](https://github.com/skovhus/jest-codemods) for single-command Jest installation and easy migration from other frameworks.*
+
 ## Basic test
 
 ```js
