@@ -96,7 +96,7 @@ expect(fn).toThrowErrorMatchingSnapshot()
 expect(node).toMatchSnapshot()
 
 // const fn = jest.fn()
-// const fn = jest.fn().mockName('myMock') -- named mock, Jest 22+
+// const fn = jest.fn().mockName('Unicorn') -- named mock, Jest 22+
 fn.mockClear() // Clear number of calls
 expect(fn).toBeCalled() // Function was called
 expect(fn).not.toBeCalled() // Function was *not* called
@@ -152,7 +152,21 @@ test('call the callback', () => {
 })
 ```
 
-You can also pass an implementation to `jest.fn` function:
+You can also use snapshots:
+
+```js
+test('call the callback', () => {
+  const callback = jest.fn().mockName('Unicorn') // mockName is available in Jest 22+
+  fn(callback)
+  expect(callback).toMatchSnapshot()
+  // ->
+  // [MockFunction Unicorn] {
+  //   "calls": Array [
+  // ...
+})
+```
+
+And pass an implementation to `jest.fn` function:
 
 ```js
 const callback = jest.fn(() => true)
