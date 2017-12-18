@@ -1,4 +1,10 @@
-# Jest cheat sheet
+<div align="center" markdown="1">
+
+<img src="https://d3vv6lp55qjaqc.cloudfront.net/items/2D2K45312x0M1q2C0a3P/jest-logo.svg" width="300"></center>
+
+<h1>Jest cheat sheet</h1>
+
+</div>
 
 _I recommend [Mrm](https://github.com/sapegin/mrm-tasks/tree/master/packages/mrm-task-jest) and [jest-codemods](https://github.com/skovhus/jest-codemods) for single-command Jest installation and easy migration from other frameworks._
 
