@@ -164,6 +164,34 @@ const fs = require('fs') // Mocked module
 const fs = require.requireActual('fs') // Original module
 ```
 
+## Testing modules with side effects
+
+Node.js and Jest will cache modules you `require`. To test modules with side effects you’ll need to reset the module registry between tests:
+
+```js
+const modulePath = '../module-to-test';
+
+afterEach(() => {
+	jest.resetModules();
+});
+
+test('first test', () => {
+	// Prepare conditions for the first test
+	const result = require(modulePath);
+	expect(result).toMatchSnapshot();
+});
+
+test('second text', () => {
+	// Prepare conditions for the second test
+	const fn = () => require(modulePath);
+	expect(fn).toThrow();
+});
+```
+
+## Usage with Babel and TypeScript
+
+Add [babel-jest](https://github.com/facebook/jest/tree/master/packages/babel-jest) or [ts-jest](https://github.com/kulshekhar/ts-jest). Check their docs for installation instructions.
+
 ## Resources
 
 * [Jest site](https://facebook.github.io/jest/)
