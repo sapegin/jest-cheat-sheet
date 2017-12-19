@@ -207,13 +207,13 @@ jest.mock('lodash/memoize', () => a => a, { virtual: true }) // The original lod
 ### Mock getters and setters
 
 ```js
-const getTitle = jest.fn(() => 'pizza');
-const setTitle = jest.fn();
-const location = {};
+const getTitle = jest.fn(() => 'pizza')
+const setTitle = jest.fn()
+const location = {}
 Object.defineProperty(location, 'title', {
-	get: getTitle,
-	set: setTitle,
-});
+  get: getTitle,
+  set: setTitle
+})
 ```
 
 ### Accessing the original module when using mocks
