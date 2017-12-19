@@ -22,6 +22,7 @@ _I recommend [Mrm](https://github.com/sapegin/mrm-tasks/tree/master/packages/mrm
   * [Mock functions](#mock-functions)
   * [Mock modules using `jest.mock` method](#mock-modules-using-jestmock-method)
   * [Mock modules using a mock file](#mock-modules-using-a-mock-file)
+  * [Mock getters and setters](#mock-getters-and-setters)
   * [Accessing the original module when using mocks](#accessing-the-original-module-when-using-mocks)
 * [Testing modules with side effects](#testing-modules-with-side-effects)
 * [Usage with Babel and TypeScript](#usage-with-babel-and-typescript)
@@ -202,6 +203,18 @@ jest.mock('lodash/memoize', () => a => a, { virtual: true }) // The original lod
 > Note: When using `babel-jest`, calls to `jest.mock` will automatically be hoisted to the top of the code block. Use `jest.doMock` if you want to explicitly avoid this behavior.
 
 [Manual mocks docs](https://facebook.github.io/jest/docs/manual-mocks.html)
+
+### Mock getters and setters
+
+```js
+const getTitle = jest.fn(() => 'pizza');
+const setTitle = jest.fn();
+const location = {};
+Object.defineProperty(location, 'title', {
+	get: getTitle,
+	set: setTitle,
+});
+```
 
 ### Accessing the original module when using mocks
 
