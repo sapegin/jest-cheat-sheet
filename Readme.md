@@ -204,6 +204,14 @@ jest.mock('lodash/memoize', () => a => a, { virtual: true }) // The original lod
 
 [Manual mocks docs](https://facebook.github.io/jest/docs/manual-mocks.html)
 
+### Mock object methods
+
+```js
+const spy = jest.spyOn(ajax, 'request').mockImplementation(() => Promise.resolve({success: true}));
+expect(spy).toHaveBeenCalled();
+spy.mockRestore();
+```
+
 ### Mock getters and setters
 
 ```js
