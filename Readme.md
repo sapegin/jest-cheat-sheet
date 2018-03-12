@@ -140,6 +140,52 @@ test('resolve to lemon', async () => {
 
 [resolves docs](https://facebook.github.io/jest/docs/en/expect.html#resolves)
 
+## Async tests
+
+### async/await
+
+```js
+test('async test', async () => {
+  expect.assertions(1)
+  const result = await runAsyncOperation()
+  expect(result).toBe(true)
+})
+```
+
+### Promises
+
+_Return_ a Promise from your test:
+
+```js
+test('async test', () => {
+  expect.assertions(1)
+  return runAsyncOperation().then(result => {
+    expect(result).toBe(true)
+  })
+})
+```
+
+### done() callback
+
+Wrap your assertions in try/catch block, oterwise Jest will ignore failures:
+
+```js
+test('async test', done => {
+  expect.assertions(1)
+  runAsyncOperation()
+  setTimeout(() => {
+    try {
+      const result = getAsyncOperationResult()
+      expect(result).toBe(true)
+      done()
+    }
+    catch (err) {
+      done.fail(err)
+    }
+  })
+})
+```
+
 ## Mocks
 
 ### Mock functions
