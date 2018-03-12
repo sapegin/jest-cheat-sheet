@@ -142,6 +142,8 @@ test('resolve to lemon', async () => {
 
 ## Async tests
 
+See [more examples](https://facebook.github.io/jest/docs/en/tutorial-async.html) in Jest docs.
+
 ### async/await
 
 ```js
