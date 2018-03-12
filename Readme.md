@@ -169,7 +169,7 @@ test('async test', () => {
 
 ### done() callback
 
-Wrap your assertions in try/catch block, oterwise Jest will ignore failures:
+Wrap your assertions in try/catch block, otherwise Jest will ignore failures:
 
 ```js
 test('async test', done => {
