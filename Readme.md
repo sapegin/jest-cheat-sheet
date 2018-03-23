@@ -8,7 +8,7 @@
 
 _I recommend [Mrm](https://github.com/sapegin/mrm-tasks/tree/master/packages/mrm-task-jest) and [jest-codemods](https://github.com/skovhus/jest-codemods) for single-command Jest installation and easy migration from other frameworks._
 
-<!-- To reformat run: npx prettier --print-width 70 --single-quote --no-semi --prose-wrap never --write Readme.md -->
+<!-- To reformat run: npx prettier --print-width 100 --single-quote --no-semi --prose-wrap never --write Readme.md -->
 
 <!-- To update run: npx markdown-toc --maxdepth 3 -i Readme.md -->
 
@@ -18,11 +18,18 @@ _I recommend [Mrm](https://github.com/sapegin/mrm-tasks/tree/master/packages/mrm
 * [Matchers](#matchers)
   * [Aliases](#aliases)
   * [Promise matchers (Jest 20+)](#promise-matchers-jest-20)
+* [Async tests](#async-tests)
+  * [async/await](#asyncawait)
+  * [Promises](#promises)
+  * [done() callback](#done-callback)
 * [Mocks](#mocks)
   * [Mock functions](#mock-functions)
   * [Mock modules using `jest.mock` method](#mock-modules-using-jestmock-method)
   * [Mock modules using a mock file](#mock-modules-using-a-mock-file)
+  * [Mock object methods](#mock-object-methods)
+  * [Mock getters and setters (Jest 22.1.0+)](#mock-getters-and-setters-jest-2210)
   * [Mock getters and setters](#mock-getters-and-setters)
+  * [Clearing and restoring mocks](#clearing-and-restoring-mocks)
   * [Accessing the original module when using mocks](#accessing-the-original-module-when-using-mocks)
 * [Testing modules with side effects](#testing-modules-with-side-effects)
 * [Usage with Babel and TypeScript](#usage-with-babel-and-typescript)
@@ -76,7 +83,10 @@ expect({ a: 1, b: 2 }).toMatchObject({
   a: expect.any(Number),
   b: expect.any(Number)
 })
-expect([{ a: 1 }, { b: 2 }]).toEqual([expect.objectContaining({ a: expect.any(Number) }), expect.anything()])
+expect([{ a: 1 }, { b: 2 }]).toEqual([
+  expect.objectContaining({ a: expect.any(Number) }),
+  expect.anything()
+])
 
 expect(2).toBeGreaterThan(1)
 expect(1).toBeGreaterThanOrEqual(1)
@@ -179,8 +189,7 @@ test('async test', done => {
       const result = getAsyncOperationResult()
       expect(result).toBe(true)
       done()
-    }
-    catch (err) {
+    } catch (err) {
       done.fail(err)
     }
   })
@@ -235,17 +244,17 @@ jest.mock('lodash/memoize', () => a => a, { virtual: true }) // The original lod
 
 ### Mock modules using a mock file
 
-1. Create a file like `__mocks__/lodash/memoize.js`:
+1.  Create a file like `__mocks__/lodash/memoize.js`:
 
-   ```js
-   module.exports = a => a
-   ```
+    ```js
+    module.exports = a => a
+    ```
 
-2. Add to your test:
+2.  Add to your test:
 
-   ```js
-   jest.mock('lodash/memoize')
-   ```
+    ```js
+    jest.mock('lodash/memoize')
+    ```
 
 > Note: When using `babel-jest`, calls to `jest.mock` will automatically be hoisted to the top of the code block. Use `jest.doMock` if you want to explicitly avoid this behavior.
 
@@ -254,9 +263,9 @@ jest.mock('lodash/memoize', () => a => a, { virtual: true }) // The original lod
 ### Mock object methods
 
 ```js
-const spy = jest.spyOn(ajax, 'request').mockImplementation(() => Promise.resolve({success: true}));
-expect(spy).toHaveBeenCalled();
-spy.mockRestore();
+const spy = jest.spyOn(ajax, 'request').mockImplementation(() => Promise.resolve({ success: true }))
+expect(spy).toHaveBeenCalled()
+spy.mockRestore()
 ```
 
 ### Mock getters and setters (Jest 22.1.0+)
