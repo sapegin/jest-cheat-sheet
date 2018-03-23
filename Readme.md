@@ -98,7 +98,6 @@ expect(node).toMatchSnapshot()
 
 // const fn = jest.fn()
 // const fn = jest.fn().mockName('Unicorn') -- named mock, Jest 22+
-fn.mockClear() // Clear number of calls
 expect(fn).toBeCalled() // Function was called
 expect(fn).not.toBeCalled() // Function was *not* called
 expect(fn).toHaveBeenCalledTimes(1) // Function was called only once
@@ -279,6 +278,15 @@ Object.defineProperty(location, 'title', {
   set: setTitle
 })
 ```
+
+### Clearing and restoring mocks
+
+```
+fn.mockClear() // Clear number of calls
+fn.mockRestore() // Remove the mock and restore the initial implementation
+```
+
+> Note: `mockRestore` works only with mocks created by `jest.spyOn`.
 
 ### Accessing the original module when using mocks
 
