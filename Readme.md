@@ -260,6 +260,14 @@ expect(spy).toHaveBeenCalled();
 spy.mockRestore();
 ```
 
+### Mock getters and setters (Jest 22.1.0+)
+
+```js
+const location = {}
+const getTitle = jest.spyOn(location, 'title', 'get').mockImplementation(() => 'pizza')
+const setTitle = jest.spyOn(location, 'title', 'set').mockImplementation(() => {})
+```
+
 ### Mock getters and setters
 
 ```js
