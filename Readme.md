@@ -337,6 +337,7 @@ Add [babel-jest](https://github.com/facebook/jest/tree/master/packages/babel-jes
 
 * [Jest site](https://facebook.github.io/jest/)
 * [Testing React components with Jest and Enzyme](http://blog.sapegin.me/all/react-jest) by Artem Sapegin
+* [React Testing Examples](https://react-testing-examples.com/)
 * [Testing React Applications](https://youtu.be/59Ndb3YkLKA) by Max Stoiber
 * [Effective Snapshot Testing](https://blog.kentcdodds.com/effective-snapshot-testing-e0d1a2c28eca) by Kent C. Dodds
 * [Migrating to Jest](https://medium.com/@kentcdodds/migrating-to-jest-881f75366e7e#.pc4s5ut6z) by Kent C. Dodds
