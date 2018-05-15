@@ -268,7 +268,7 @@ expect(spy).toHaveBeenCalled()
 spy.mockRestore()
 ```
 ### Mock object methods and call through to the real function
-
+If you want to spy a function without alter its behavior, add `.andCallThrough()`
 ```js 
 const spyWithCallToRealFunction = jest.spyOn(ajax, 'request').andCallThrough()
 ```
@@ -291,23 +291,6 @@ Object.defineProperty(location, 'title', {
   get: getTitle,
   set: setTitle
 })
-```
-
-### Verify mock calling 
-
-```js
-const spy = jest.spyOn(ajax, 'request').mockImplementation(() => Promise.resolve({ success: true }))
-//  Verify it was called
-expect(spy).toHaveBeenCalled()
-
-// Verify it was called with specific arguments
-expect(spy).not.toHaveBeenCalledWith('foo', 'bar')
-
-// Verify how many times it was called
-expect(spy.callCount).not.toEqual(2)
-
-// Get the arguments to the last call
-expect(spy.args).toBeUndefined()
 ```
 
 ### Clearing and restoring mocks
