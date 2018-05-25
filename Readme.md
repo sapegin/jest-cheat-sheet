@@ -286,6 +286,11 @@ const spy = jest.spyOn(ajax, 'request').mockImplementation(() => Promise.resolve
 expect(spy).toHaveBeenCalled()
 spy.mockRestore()
 ```
+### Mock object methods and call through to the real function
+If you want to spy a function without alter its behavior, add `.andCallThrough()`
+```js 
+const spyWithCallToRealFunction = jest.spyOn(ajax, 'request').andCallThrough()
+```
 
 ### Mock getters and setters (Jest 22.1.0+)
 
