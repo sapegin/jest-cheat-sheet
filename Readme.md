@@ -110,6 +110,10 @@ expect(fn).toThrow('Out of cheese')
 expect(fn).toThrowErrorMatchingSnapshot()
 
 expect(node).toMatchSnapshot()
+// Jest 23+
+expect(user).toMatchSnapshot({
+  date: expect.any(Date)
+})
 
 // const fn = jest.fn()
 // const fn = jest.fn().mockName('Unicorn') -- named mock, Jest 22+
