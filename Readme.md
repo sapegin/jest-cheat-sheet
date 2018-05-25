@@ -14,7 +14,7 @@ _I recommend [Mrm](https://github.com/sapegin/mrm-tasks/tree/master/packages/mrm
 
 <!-- toc -->
 
-* [Basic test](#basic-test)
+* [Test structure](#test-structure)
 * [Matchers](#matchers)
   * [Aliases](#aliases)
   * [Promise matchers (Jest 20+)](#promise-matchers-jest-20)
@@ -31,6 +31,8 @@ _I recommend [Mrm](https://github.com/sapegin/mrm-tasks/tree/master/packages/mrm
   * [Mock getters and setters](#mock-getters-and-setters)
   * [Clearing and restoring mocks](#clearing-and-restoring-mocks)
   * [Accessing the original module when using mocks](#accessing-the-original-module-when-using-mocks)
+* [Data-driven tests (Jest 23+)](#data-driven-tests-jest-23)
+* [Skipping tests](#skipping-tests)
 * [Testing modules with side effects](#testing-modules-with-side-effects)
 * [Usage with Babel and TypeScript](#usage-with-babel-and-typescript)
 * [Resources](#resources)
@@ -44,11 +46,19 @@ _I recommend [Mrm](https://github.com/sapegin/mrm-tasks/tree/master/packages/mrm
 
 ```js
 describe('makePoniesPink', () => {
-  beforeAll(() => { /* Runs before all tests */ })
-  afterAll(() => { /* Runs after all tests */ })
-  beforeEach(() => { /* Runs before each test */ })
-  afterEach(() => { /* Runs after each test */ })
-  
+  beforeAll(() => {
+    /* Runs before all tests */
+  })
+  afterAll(() => {
+    /* Runs after all tests */
+  })
+  beforeEach(() => {
+    /* Runs before each test */
+  })
+  afterEach(() => {
+    /* Runs after each test */
+  })
+
   test('make each pony pink', () => {
     const actual = fn(['Alice', 'Bob', 'Eve'])
     expect(actual).toEqual(['Pink Alice', 'Pink Bob', 'Pink Eve'])
@@ -319,12 +329,9 @@ const fs = require.requireActual('fs') // Original module
 Run the same test with different data:
 
 ```js
-test.each([[1, 1, 2], [1, 2, 3], [2, 1, 3]])(
-  '.add(%s, %s)',
-  (a, b, expected) => {
-    expect(a + b).toBe(expected);
-  },
-);
+test.each([[1, 1, 2], [1, 2, 3], [2, 1, 3]])('.add(%s, %s)', (a, b, expected) => {
+  expect(a + b).toBe(expected)
+})
 ```
 
 Or the same using template literals:
@@ -335,9 +342,9 @@ test.each`
   ${1} | ${1} | ${2}
   ${1} | ${2} | ${3}
   ${2} | ${1} | ${3}
-`('returns $expected when $a is added $b', ({a, b, expected}) => {
-  expect(a + b).toBe(expected);
-});
+`('returns $expected when $a is added $b', ({ a, b, expected }) => {
+  expect(a + b).toBe(expected)
+})
 ```
 
 [test.each() docs](https://facebook.github.io/jest/docs/en/api.html#testeachtable-name-fn)
