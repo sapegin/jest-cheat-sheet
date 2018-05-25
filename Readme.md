@@ -343,14 +343,14 @@ test.each`
 Don’t run these tests:
 
 ```js
-describe.skip('makePoniesPink'
+describe.skip('makePoniesPink'...
 tests.skip('make each pony pink'...
 ```
 
 Run only these tests:
 
 ```js
-describe.only('makePoniesPink'
+describe.only('makePoniesPink'...
 tests.only('make each pony pink'...
 ```
 
