@@ -40,10 +40,15 @@ _I recommend [Mrm](https://github.com/sapegin/mrm-tasks/tree/master/packages/mrm
 
 <!-- tocstop -->
 
-## Basic test
+## Test structure
 
 ```js
 describe('makePoniesPink', () => {
+  beforeAll(() => { /* Runs before all tests */ })
+  afterAll(() => { /* Runs after all tests */ })
+  beforeEach(() => { /* Runs before each test */ })
+  afterEach(() => { /* Runs after each test */ })
+  
   test('make each pony pink', () => {
     const actual = fn(['Alice', 'Bob', 'Eve'])
     expect(actual).toEqual(['Pink Alice', 'Pink Bob', 'Pink Eve'])
@@ -303,6 +308,50 @@ fn.mockRestore() // Remove the mock and restore the initial implementation
 jest.mock('fs')
 const fs = require('fs') // Mocked module
 const fs = require.requireActual('fs') // Original module
+```
+
+## Data-driven tests (Jest 23+)
+
+Run the same test with different data:
+
+```js
+test.each([[1, 1, 2], [1, 2, 3], [2, 1, 3]])(
+  '.add(%s, %s)',
+  (a, b, expected) => {
+    expect(a + b).toBe(expected);
+  },
+);
+```
+
+Or the same using template literals:
+
+```js
+test.each`
+  a    | b    | expected
+  ${1} | ${1} | ${2}
+  ${1} | ${2} | ${3}
+  ${2} | ${1} | ${3}
+`('returns $expected when $a is added $b', ({a, b, expected}) => {
+  expect(a + b).toBe(expected);
+});
+```
+
+[test.each() docs](https://facebook.github.io/jest/docs/en/api.html#testeachtable-name-fn)
+
+## Skipping tests
+
+Don’t run these tests:
+
+```js
+describe.skip('makePoniesPink'
+tests.skip('make each pony pink'...
+```
+
+Run only these tests:
+
+```js
+describe.only('makePoniesPink'
+tests.only('make each pony pink'...
 ```
 
 ## Testing modules with side effects
