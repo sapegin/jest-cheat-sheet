@@ -75,6 +75,8 @@ expect.hasAssertions() // At least one assertion is called during a test
 expect(42).toBe(42) // ===
 expect(42).not.toBe(3) // !==
 expect([1, 2]).toEqual([1, 2]) // Deep equality
+expect({a: undefined, b: 2}).toEqual({b: 2}) // Deep equality
+expect({a: undefined, b: 2}).not.toStrictEqual({b: 2}) // Strict equality (Jest 23+)
 expect('').toBeFalsy() // false, 0, '', null, undefined, NaN
 expect('foo').toBeTruthy() // Not false, 0, '', null, undefined, NaN
 expect(null).toBeNull() // === null
@@ -130,8 +132,13 @@ expect(user).toMatchSnapshot({
 expect(fn).toBeCalled() // Function was called
 expect(fn).not.toBeCalled() // Function was *not* called
 expect(fn).toHaveBeenCalledTimes(1) // Function was called only once
-expect(fn).toBeCalledWith('first arg', 'second arg') // Any of calls was with these arguments
-expect(fn).toHaveBeenLastCalledWith('first arg', 'secon arg') // Last call was with these arguments
+expect(fn).toBeCalledWith(arg1, arg2) // Any of calls was with these arguments
+expect(fn).toHaveBeenLastCalledWith(arg1, arg2) // Last call was with these arguments
+expect(fn).toHaveBeenNthCalledWith(args) // Nth call was with these arguments (Jest 23+)
+expect(fn).toHaveReturnedTimes(2) // Function was returned without throwing an error (Jest 23+)
+expect(fn).toHaveReturnedWith(value) // Function returned a value (Jest 23+)
+expect(fn).toHaveLastReturnedWith(value) // Last function call returned a value (Jest 23+)
+expect(fn).toHaveNthReturnedWith(value) // Nth function call returned a value (Jest 23+)
 expect(fn.mock.calls).toEqual([['first', 'call', 'args'], ['second', 'call', 'args']]) // Multiple calls
 expect(fn.mock.calls[0][0](1)).toBe(2) // fn.mock.calls[0][0] — the first argument of the first call
 ```
@@ -143,6 +150,11 @@ expect(fn.mock.calls[0][0](1)).toBe(2) // fn.mock.calls[0][0] — the first argu
 * `toBeCalled` → `toHaveBeenCalled`
 * `toBeCalledWith` → `toHaveBeenCalledWith`
 * `lastCalledWith` → `toHaveBeenLastCalledWith`
+* `nthCalledWith` → `toHaveBeenNthCalledWith`
+* `toReturnTimes` → `toHaveReturnedTimes`
+* `toReturnWith` → `toHaveReturnedWith`
+* `lastReturnedWith` → `toHaveLastReturnedWith`
+* `nthReturnedWith` → `toHaveNthReturnedWith`
 * `toThrowError` → `toThrow`
 
 ### Promise matchers (Jest 20+)
