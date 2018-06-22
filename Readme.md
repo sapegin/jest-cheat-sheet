@@ -69,9 +69,6 @@ describe('makePoniesPink', () => {
 ## Matchers
 
 ```js
-expect.assertions(28) // Exactly 28 assertions are called during a test
-expect.hasAssertions() // At least one assertion is called during a test
-
 expect(42).toBe(42) // ===
 expect(42).not.toBe(3) // !==
 expect([1, 2]).toEqual([1, 2]) // Deep equality
@@ -183,6 +180,18 @@ test('resolve to lemon', async () => {
 ## Async tests
 
 See [more examples](https://facebook.github.io/jest/docs/en/tutorial-async.html) in Jest docs.
+
+It’s a good practice to specify a number of expected assertions in async tests, so the test will fail if your assertions weren’t called at all.
+
+```js
+test('async test', () => {
+  expect.assertions(3) // Exactly three assertions are called during a test
+  // OR
+  expect.hasAssertions() // At least one assertion is called during a test
+
+  // Your async tests
+})
+```
 
 ### async/await
 
