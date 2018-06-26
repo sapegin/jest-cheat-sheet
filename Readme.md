@@ -68,27 +68,64 @@ describe('makePoniesPink', () => {
 
 ## Matchers
 
+[Using matchers](http://jestjs.io/docs/en/using-matchers), [matchers docs](https://facebook.github.io/jest/docs/expect.html)
+
+### Basic matchers
+
 ```js
-expect(42).toBe(42) // ===
-expect(42).not.toBe(3) // !==
+expect(42).toBe(42) // Strict equality (===)
+expect(42).not.toBe(3) // Strict equality (!==)
 expect([1, 2]).toEqual([1, 2]) // Deep equality
 expect({a: undefined, b: 2}).toEqual({b: 2}) // Deep equality
 expect({a: undefined, b: 2}).not.toStrictEqual({b: 2}) // Strict equality (Jest 23+)
-expect('').toBeFalsy() // false, 0, '', null, undefined, NaN
-expect('foo').toBeTruthy() // Not false, 0, '', null, undefined, NaN
-expect(null).toBeNull() // === null
-expect(undefined).toBeUndefined() // === undefined
-expect(7).toBeDefined() // !== undefined
+```
 
+### Truthiness
+
+```js
+// Matches anything that an if statement treats as false (not false, 0, '', null, undefined, NaN)
+expect('foo').toBeTruthy() 
+// Matches anything that an if statement treats as true (false, 0, '', null, undefined, NaN)
+expect('').toBeFalsy() 
+// Matches only null
+expect(null).toBeNull() 
+// Matches only undefined
+expect(undefined).toBeUndefined()
+// The opposite of toBeUndefined
+expect(7).toBeDefined()
+```
+
+### Numbers
+
+```js
+expect(2).toBeGreaterThan(1)
+expect(1).toBeGreaterThanOrEqual(1)
+expect(1).toBeLessThan(2)
+expect(1).toBeLessThanOrEqual(1)
+expect(0.2 + 0.1).toBeCloseTo(0.3, 5)
+```
+
+### Strings
+
+```js
 expect('long string').toMatch('str')
 expect('coffee').toMatch(/ff/)
 expect('pizza').not.toMatch('coffee')
 expect(['pizza', 'coffee']).toEqual([expect.stringContaining('zz'), expect.stringMatching(/ff/)])
+```
 
-expect(new A()).toBeInstanceOf(A)
-expect(() => {}).toEqual(expect.any(Function))
-expect('pizza').toEqual(expect.anything())
+### Arrays
 
+```js
+expect(['Alice', 'Bob', 'Eve']).toHaveLength(3)
+expect(['Alice', 'Bob', 'Eve']).toContain('Alice')
+expect([{ a: 1 }, { a: 2 }]).toContainEqual({ a: 1 })
+expect(['Alice', 'Bob', 'Eve']).toEqual(expect.arrayContaining(['Alice', 'Bob']))
+```
+
+### Objects
+
+```js
 expect({ a: 1 }).toHaveProperty('a')
 expect({ a: 1 }).toHaveProperty('a', 1)
 expect({ a: { b: 1 } }).toHaveProperty('a.b')
@@ -101,29 +138,36 @@ expect([{ a: 1 }, { b: 2 }]).toEqual([
   expect.objectContaining({ a: expect.any(Number) }),
   expect.anything()
 ])
+```
 
-expect(2).toBeGreaterThan(1)
-expect(1).toBeGreaterThanOrEqual(1)
-expect(1).toBeLessThan(2)
-expect(1).toBeLessThanOrEqual(1)
-expect(0.2 + 0.1).toBeCloseTo(0.3, 5)
+### Exceptions
 
-expect(['Alice', 'Bob', 'Eve']).toHaveLength(3)
-expect(['Alice', 'Bob', 'Eve']).toContain('Alice')
-expect([{ a: 1 }, { a: 2 }]).toContainEqual({ a: 1 })
-expect(['Alice', 'Bob', 'Eve']).toEqual(expect.arrayContaining(['Alice', 'Bob']))
-
+```js
 // const fn = () => { throw new Error('Out of cheese!') }
 expect(fn).toThrow()
 expect(fn).toThrow('Out of cheese')
 expect(fn).toThrowErrorMatchingSnapshot()
+```
 
+<details>
+  <summary>Aliases</summary>
+
+* `toThrowError` → `toThrow`
+</details>
+
+### Snapshots
+
+```js
 expect(node).toMatchSnapshot()
 // Jest 23+
 expect(user).toMatchSnapshot({
   date: expect.any(Date)
 })
+```
 
+### Mock functions
+
+```js
 // const fn = jest.fn()
 // const fn = jest.fn().mockName('Unicorn') -- named mock, Jest 22+
 expect(fn).toBeCalled() // Function was called
@@ -140,9 +184,8 @@ expect(fn.mock.calls).toEqual([['first', 'call', 'args'], ['second', 'call', 'ar
 expect(fn.mock.calls[0][0](1)).toBe(2) // fn.mock.calls[0][0] — the first argument of the first call
 ```
 
-[Matchers docs](https://facebook.github.io/jest/docs/expect.html)
-
-### Aliases
+<details>
+  <summary>Aliases</summary>
 
 * `toBeCalled` → `toHaveBeenCalled`
 * `toBeCalledWith` → `toHaveBeenCalledWith`
@@ -152,7 +195,15 @@ expect(fn.mock.calls[0][0](1)).toBe(2) // fn.mock.calls[0][0] — the first argu
 * `toReturnWith` → `toHaveReturnedWith`
 * `lastReturnedWith` → `toHaveLastReturnedWith`
 * `nthReturnedWith` → `toHaveNthReturnedWith`
-* `toThrowError` → `toThrow`
+</details>
+
+### Misc
+
+```js
+expect(new A()).toBeInstanceOf(A)
+expect(() => {}).toEqual(expect.any(Function))
+expect('pizza').toEqual(expect.anything())
+```
 
 ### Promise matchers (Jest 20+)
 
