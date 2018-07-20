@@ -390,12 +390,23 @@ Object.defineProperty(location, 'title', {
 
 ### Clearing and restoring mocks
 
-```
-fn.mockClear() // Clear number of calls
-fn.mockRestore() // Remove the mock and restore the initial implementation
+For one mock:
+
+```js
+fn.mockClear() // Clears mock usage date (fn.mock.calls, fn.mock.instances)
+fn.mockReset() // Clears and removes any mocked return values or implementations
+fn.mockRestore() // Resets and restores the initial implementation
 ```
 
 > Note: `mockRestore` works only with mocks created by `jest.spyOn`.
+
+For all mocks:
+
+```js
+jest.clearAllMocks()
+jest.resetAllMocks()
+jest.restoreAllMocks()
+```
 
 ### Accessing the original module when using mocks
 
