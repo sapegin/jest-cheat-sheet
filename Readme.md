@@ -172,6 +172,7 @@ expect(node).toMatchSnapshot()
 expect(user).toMatchSnapshot({
   date: expect.any(Date)
 })
+expect(user).toMatchInlineSnapshot()
 ```
 
 ### Mock functions
