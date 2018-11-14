@@ -22,6 +22,7 @@ _I recommend [Mrm](https://github.com/sapegin/mrm-tasks/tree/master/packages/mrm
   - [Strings](#strings)
   - [Arrays](#arrays)
   - [Objects](#objects)
+  - [Mixing Objects and Arrays](#mixing-object-and-arrays)
   - [Exceptions](#exceptions)
   - [Snapshots](#snapshots)
   - [Mock functions](#mock-functions)
@@ -147,6 +148,19 @@ expect([{ a: 1 }, { b: 2 }]).toEqual([
   expect.objectContaining({ a: expect.any(Number) }),
   expect.anything()
 ])
+```
+
+### Mixing Object and Arrays
+
+```
+const result = {
+   activeFilters: ['Medium'],
+   notActiveFilters: ['Light', 'High', 'Maximum']
+};
+expect(result).toMatchObject({
+   activeFilters: expect.arrayContaining(['Medium']),
+   notActiveFilters: expect.arrayContaining(['Light', 'High', 'Maximum'])
+});
 ```
 
 ### Exceptions
