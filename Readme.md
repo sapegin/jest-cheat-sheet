@@ -10,7 +10,7 @@ _I recommend [Mrm](https://github.com/sapegin/mrm-tasks/tree/master/packages/mrm
 
 <!-- To reformat run: npx prettier --print-width 100 --single-quote --no-semi --prose-wrap never --write Readme.md -->
 
-<!-- To update run: npx markdown-toc --maxdepth 3 -i Readme.md -->
+<!-- To update TOC run: npx markdown-toc --maxdepth 3 -i Readme.md -->
 
 <!-- toc -->
 
@@ -40,6 +40,7 @@ _I recommend [Mrm](https://github.com/sapegin/mrm-tasks/tree/master/packages/mrm
   - [Mock getters and setters](#mock-getters-and-setters)
   - [Clearing and restoring mocks](#clearing-and-restoring-mocks)
   - [Accessing the original module when using mocks](#accessing-the-original-module-when-using-mocks)
+  - [Timer mocks](#timer-mocks)
 - [Data-driven tests (Jest 23+)](#data-driven-tests-jest-23)
 - [Skipping tests](#skipping-tests)
 - [Testing modules with side effects](#testing-modules-with-side-effects)
@@ -416,6 +417,29 @@ jest.mock('fs')
 const fs = require('fs') // Mocked module
 const fs = require.requireActual('fs') // Original module
 ```
+
+### Timer mocks
+
+Write synchronous test for code that uses native timer functions (`setTimeout`, `setInterval`, `clearTimeout`, `clearInterval`).
+
+```js
+// Enable fake timers
+jest.useFakeTimers()
+
+test('kill the time', () => {
+  const callback = jest.fn()
+  // Run some code that uses setTimeout or setInterval
+  const actual = someFunctionThatUseTimers(callback)
+  // Fast-forward until all timers have been executed
+  jest.runAllTimers()
+  // Check the results synchronously
+  expect(callback).toHaveBeenCalledTimes(1)
+})
+```
+
+Use [jest.runOnlyPendingTimers()](https://jestjs.io/docs/en/timer-mocks#run-pending-timers) for special cases.
+
+Or adjust timers by time with [advanceTimersByTime()](https://jestjs.io/docs/en/timer-mocks#advance-timers-by-time).
 
 ## Data-driven tests (Jest 23+)
 
