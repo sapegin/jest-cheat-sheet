@@ -464,7 +464,7 @@ test.each`
 })
 ```
 
-[test.each() docs](https://facebook.github.io/jest/docs/en/api.html#testeachtable-name-fn)
+[test.each() docs](https://jestjs.io/docs/en/api.html#testeachtable-name-fn-timeout)
 
 ## Skipping tests
 
