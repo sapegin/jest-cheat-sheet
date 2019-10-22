@@ -192,7 +192,7 @@ expect(fn).toHaveReturnedWith(value) // Function returned a value (Jest 23+)
 expect(fn).toHaveLastReturnedWith(value) // Last function call returned a value (Jest 23+)
 expect(fn).toHaveNthReturnedWith(value) // Nth function call returned a value (Jest 23+)
 expect(fn.mock.calls).toEqual([['first', 'call', 'args'], ['second', 'call', 'args']]) // Multiple calls
-expect(fn.mock.calls[0][0](1)).toBe(2) // fn.mock.calls[0][0] — the first argument of the first call
+expect(fn.mock.calls[0][0]).toBe(2) // fn.mock.calls[0][0] — the first argument of the first call
 ```
 
 <details>
