@@ -536,6 +536,6 @@ Improvements are welcome! Open an issue or send a pull request.
 
 ## Author and license
 
-[Artem Sapegin](http://sapegin.me/), a frontend developer at [Wayfair](https://tech.wayfair.com/) and the creator of [React Styleguidist](https://github.com/styleguidist/react-styleguidist). I also write about frontend at [my blog](http://blog.sapegin.me/).
+[Artem Sapegin](http://sapegin.me/), a frontend engineer at [Omio](https://omio.com/) and the creator of [React Styleguidist](https://react-styleguidist.js.org/). I also write about frontend at [my blog](https://blog.sapegin.me/).
 
 CC0 1.0 Universal license, see the included [License.md](/License.md) file.
