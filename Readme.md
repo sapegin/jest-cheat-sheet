@@ -464,7 +464,17 @@ test.each`
 })
 ```
 
-[test.each() docs](https://jestjs.io/docs/en/api.html#testeachtable-name-fn-timeout)
+Or on `describe` level: 
+
+```js
+describe.each([['mobile'], ['tablet'], ['desktop']])('checkout flow on %s', (viewport) => {
+  test('displays success page', () => {
+    // 
+  })
+})
+```
+
+[describe.each() docs](https://jestjs.io/docs/en/api.html#describeeachtablename-fn-timeout), [test.each() docs](https://jestjs.io/docs/en/api.html#testeachtablename-fn-timeout), 
 
 ## Skipping tests
 
