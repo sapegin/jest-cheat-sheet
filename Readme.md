@@ -365,6 +365,12 @@ jest.mock('lodash/memoize', () => a => a, { virtual: true }) // The original lod
 ### Mock object methods
 
 ```js
+const spy = jest.spyOn(console, 'log').mockImplementation(() => {})
+expect(console.log.mock.calls).toEqual([['dope'], ['nope']])
+spy.mockRestore()
+```
+
+```js
 const spy = jest.spyOn(ajax, 'request').mockImplementation(() => Promise.resolve({ success: true }))
 expect(spy).toHaveBeenCalled()
 spy.mockRestore()
