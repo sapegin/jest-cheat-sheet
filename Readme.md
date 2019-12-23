@@ -550,6 +550,12 @@ Add [babel-jest](https://github.com/facebook/jest/tree/master/packages/babel-jes
 
 Improvements are welcome! Open an issue or send a pull request.
 
+## Sponsoring
+
+This software has been developed with lots of coffee, buy me one more cup to keep it going.
+
+<a href="https://www.buymeacoffee.com/sapegin" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/lato-orange.png" alt="Buy Me A Coffee" height="51" width="217" ></a>
+
 ## Author and license
 
 [Artem Sapegin](http://sapegin.me/), a frontend engineer at [Omio](https://omio.com/) and the creator of [React Styleguidist](https://react-styleguidist.js.org/). I also write about frontend at [my blog](https://blog.sapegin.me/).
