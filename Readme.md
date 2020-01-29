@@ -552,6 +552,7 @@ Add [babel-jest](https://github.com/facebook/jest/tree/master/packages/babel-jes
 ## Resources
 
 - [Jest site](https://facebook.github.io/jest/)
+- [Modern React testing, part 1: best practices](https://blog.sapegin.me/all/react-testing-1-best-practices/) by Artem Sapegin
 - [Modern React testing, part 2: Jest and Enzyme](https://blog.sapegin.me/all/react-testing-2-jest-and-enzyme/) by Artem Sapegin
 - [Modern React testing, part 3: Jest and React Testing Library](https://blog.sapegin.me/all/react-testing-3-jest-and-react-testing-library/) by Artem Sapegin
 - [React Testing Examples](https://react-testing-examples.com/)
