@@ -434,10 +434,33 @@ jest.useFakeTimers()
 
 test('kill the time', () => {
   const callback = jest.fn()
+  
   // Run some code that uses setTimeout or setInterval
   const actual = someFunctionThatUseTimers(callback)
+  
   // Fast-forward until all timers have been executed
   jest.runAllTimers()
+  
+  // Check the results synchronously
+  expect(callback).toHaveBeenCalledTimes(1)
+})
+```
+
+Or adjust timers by time with [advanceTimersByTime()](https://jestjs.io/docs/en/timer-mocks#advance-timers-by-time):
+
+```js
+// Enable fake timers
+jest.useFakeTimers()
+
+test('kill the time', () => {
+  const callback = jest.fn()
+  
+  // Run some code that uses setTimeout or setInterval
+  const actual = someFunctionThatUseTimers(callback)
+  
+  // Fast-forward for 250 ms
+  jest.advanceTimersByTime(250)
+  
   // Check the results synchronously
   expect(callback).toHaveBeenCalledTimes(1)
 })
@@ -445,7 +468,7 @@ test('kill the time', () => {
 
 Use [jest.runOnlyPendingTimers()](https://jestjs.io/docs/en/timer-mocks#run-pending-timers) for special cases.
 
-Or adjust timers by time with [advanceTimersByTime()](https://jestjs.io/docs/en/timer-mocks#advance-timers-by-time).
+**Note:** you should call `jest.useFakeTimers()` in your test case to use other fake timer methods.
 
 ## Data-driven tests (Jest 23+)
 
