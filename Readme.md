@@ -59,19 +59,20 @@ describe('makePoniesPink', () => {
   beforeAll(() => {
     /* Runs before all tests */
   })
-  afterAll(() => {
-    /* Runs after all tests */
-  })
   beforeEach(() => {
     /* Runs before each test */
-  })
-  afterEach(() => {
-    /* Runs after each test */
   })
 
   test('make each pony pink', () => {
     const actual = fn(['Alice', 'Bob', 'Eve'])
     expect(actual).toEqual(['Pink Alice', 'Pink Bob', 'Pink Eve'])
+  })
+  
+  afterEach(() => {
+    /* Runs after each test */
+  })
+  afterAll(() => {
+    /* Runs after all tests */
   })
 })
 ```
@@ -103,6 +104,8 @@ expect(null).toBeNull()
 expect(undefined).toBeUndefined()
 // The opposite of toBeUndefined
 expect(7).toBeDefined()
+// Matches true or false
+expect(true).toEqual(expect.any(Boolean))
 ```
 
 ### Numbers
@@ -113,12 +116,14 @@ expect(1).toBeGreaterThanOrEqual(1)
 expect(1).toBeLessThan(2)
 expect(1).toBeLessThanOrEqual(1)
 expect(0.2 + 0.1).toBeCloseTo(0.3, 5)
+expect(NaN).toEqual(expect.any(Number))
 ```
 
 ### Strings
 
 ```js
 expect('long string').toMatch('str')
+expect('string').toEqual(expect.any(String))
 expect('coffee').toMatch(/ff/)
 expect('pizza').not.toMatch('coffee')
 expect(['pizza', 'coffee']).toEqual([expect.stringContaining('zz'), expect.stringMatching(/ff/)])
@@ -127,6 +132,7 @@ expect(['pizza', 'coffee']).toEqual([expect.stringContaining('zz'), expect.strin
 ### Arrays
 
 ```js
+expect([]).toEqual(expect.any(Array))
 expect(['Alice', 'Bob', 'Eve']).toHaveLength(3)
 expect(['Alice', 'Bob', 'Eve']).toContain('Alice')
 expect([{ a: 1 }, { a: 2 }]).toContainEqual({ a: 1 })
@@ -223,7 +229,8 @@ test('resolve to lemon', () => {
   expect.assertions(1)
   // Make sure to add a return statement
   return expect(Promise.resolve('lemon')).resolves.toBe('lemon')
-  // return expect(Promise.reject('octopus')).rejects.toBeDefined();
+  return expect(Promise.reject('octopus')).rejects.toBeDefined()
+  return expect(Promise.reject(Error('pizza'))).rejects.toThrow()
 })
 ```
 
@@ -253,6 +260,10 @@ test('async test', () => {
 
   // Your async tests
 })
+```
+Note that you can also do this per file, outside any `describe` and `test`:
+```js
+beforeEach(expect.hasAssertions)
 ```
 
 ### async/await
