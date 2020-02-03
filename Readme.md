@@ -59,20 +59,19 @@ describe('makePoniesPink', () => {
   beforeAll(() => {
     /* Runs before all tests */
   })
+  afterAll(() => {
+    /* Runs after all tests */
+  })
   beforeEach(() => {
     /* Runs before each test */
   })
-
-  test('make each pony pink', () => {
-    const actual = fn(['Alice', 'Bob', 'Eve'])
-    expect(actual).toEqual(['Pink Alice', 'Pink Bob', 'Pink Eve'])
-  })
-  
   afterEach(() => {
     /* Runs after each test */
   })
-  afterAll(() => {
-    /* Runs after all tests */
+  
+  test('make each pony pink', () => {
+    const actual = fn(['Alice', 'Bob', 'Eve'])
+    expect(actual).toEqual(['Pink Alice', 'Pink Bob', 'Pink Eve'])
   })
 })
 ```
@@ -265,6 +264,7 @@ Note that you can also do this per file, outside any `describe` and `test`:
 ```js
 beforeEach(expect.hasAssertions)
 ```
+This will verify the presense of at least one assertion per test case. It also plays nice with more specific `expect.assertions(3)` declarations.
 
 ### async/await
 
