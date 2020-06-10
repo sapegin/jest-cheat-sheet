@@ -33,6 +33,7 @@ _I recommend [Mrm](https://github.com/sapegin/mrm-tasks/tree/master/packages/mrm
   - [done() callback](#done-callback)
 - [Mocks](#mocks)
   - [Mock functions](#mock-functions-1)
+  - [Returning, resolving and rejecting values](#Returning-resolving-and-rejecting-values)
   - [Mock modules using `jest.mock` method](#mock-modules-using-jestmock-method)
   - [Mock modules using a mock file](#mock-modules-using-a-mock-file)
   - [Mock object methods](#mock-object-methods)
@@ -343,6 +344,41 @@ const callback = jest.fn(() => true)
 ```
 
 [Mock functions docs](https://facebook.github.io/jest/docs/mock-function-api.html)
+
+### Returning, resolving and rejecting values
+
+Your mocks can return values:
+
+```js
+const callback = jest.fn().mockReturnValue(true);
+const callbackOnce = jest.fn().mockReturnValueOnce(true);
+```
+
+Or resolve values:
+
+```js
+const promise = jest.fn().mockResolvedValue(true);
+const promiseOnce = jest.fn().mockResolvedValueOnce(true);
+```
+
+They can even reject values:
+
+```js
+const failedPromise = jest.fn().mockRejectedValue("Error");
+const failedPromiseOnce = jest.fn().mockRejectedValueOnce("Error");
+```
+
+You can even combine these:
+
+```js
+const callback = jest.fn()
+  .mockReturnValueOnce(false)
+  .mockReturnValue(true);
+
+// ->
+//  call 1: false
+//  call 2+: true
+```
 
 ### Mock modules using `jest.mock` method
 
