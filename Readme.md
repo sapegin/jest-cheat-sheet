@@ -33,7 +33,7 @@ _I recommend [Mrm](https://github.com/sapegin/mrm-tasks/tree/master/packages/mrm
   - [done() callback](#done-callback)
 - [Mocks](#mocks)
   - [Mock functions](#mock-functions-1)
-  - [Returning, resolving and rejecting values](#Returning,-resolving-and-rejecting-values)
+  - [Returning, resolving and rejecting values](#Returning-resolving-and-rejecting-values)
   - [Mock modules using `jest.mock` method](#mock-modules-using-jestmock-method)
   - [Mock modules using a mock file](#mock-modules-using-a-mock-file)
   - [Mock object methods](#mock-object-methods)
