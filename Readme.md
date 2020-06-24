@@ -320,6 +320,8 @@ test('call the callback', () => {
   fn(callback)
   expect(callback).toBeCalled()
   expect(callback.mock.calls[0][1].baz).toBe('pizza') // Second argument of the first call
+  // Match the first and the last arguments but ignore the second argument
+  expect(callback).toHaveBeenLastCalledWith('meal', expect.anything(), 'margarita');
 })
 ```
 
