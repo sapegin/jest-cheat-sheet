@@ -192,7 +192,7 @@ expect(fn).not.toBeCalled() // Function was *not* called
 expect(fn).toHaveBeenCalledTimes(1) // Function was called only once
 expect(fn).toBeCalledWith(arg1, arg2) // Any of calls was with these arguments
 expect(fn).toHaveBeenLastCalledWith(arg1, arg2) // Last call was with these arguments
-expect(fn).toHaveBeenNthCalledWith(args) // Nth call was with these arguments (Jest 23+)
+expect(fn).toHaveBeenNthCalledWith(nthCall, args) // Nth call was with these arguments (Jest 23+)
 expect(fn).toHaveReturnedTimes(2) // Function was returned without throwing an error (Jest 23+)
 expect(fn).toHaveReturnedWith(value) // Function returned a value (Jest 23+)
 expect(fn).toHaveLastReturnedWith(value) // Last function call returned a value (Jest 23+)
