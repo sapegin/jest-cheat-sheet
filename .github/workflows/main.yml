@@ -1,0 +1,26 @@
+name: Docs to PDF
+# This workflow is triggered on pushes to the master branch.
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  converttopdf:
+    name: Create our PDF
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      # Generate PDF for each folder in /contents
+      - uses: mkrakowitzer/actions-makepdfs@master
+        with:
+          markdown_dir: 
+          output_dir: pdfen
+
+
+      # Upload PDF of Markdown files
+      - uses: actions/upload-artifact@v1
+        with:
+          name: pdf
+          path: pdfen
