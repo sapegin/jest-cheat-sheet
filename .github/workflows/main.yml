@@ -1,4 +1,4 @@
-name: Docs to PDF
+name: Generate PDF
 # This workflow is triggered on pushes to the master branch.
 on:
   push:
