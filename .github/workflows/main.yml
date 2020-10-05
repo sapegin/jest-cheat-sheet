@@ -17,8 +17,6 @@ jobs:
         with:
           markdown_dir: 
           output_dir: pdfen
-
-
       # Upload PDF of Markdown files
       - uses: actions/upload-artifact@v1
         with:
