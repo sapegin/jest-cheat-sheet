@@ -1,12 +1,12 @@
 <div align="center" markdown="1">
 
-<img src="https://d3vv6lp55qjaqc.cloudfront.net/items/2D2K45312x0M1q2C0a3P/jest-logo.svg" width="200">
+<img src="https://github.com/facebook/jest/raw/master/website/static/img/jest.png" width="200">
 
 <h1>Jest cheat sheet</h1>
 
 </div>
 
-_I recommend [Mrm](https://github.com/sapegin/mrm-tasks/tree/master/packages/mrm-task-jest) and [jest-codemods](https://github.com/skovhus/jest-codemods) for single-command Jest installation and easy migration from other frameworks._
+_I recommend [Mrm](https://github.com/sapegin/mrm/tree/master/packages/mrm-task-jest) and [jest-codemods](https://github.com/skovhus/jest-codemods) for single-command Jest installation and easy migration from other frameworks._
 
 <!-- To reformat run: npx prettier --print-width 100 --single-quote --no-semi --prose-wrap never --write Readme.md -->
 
@@ -33,7 +33,7 @@ _I recommend [Mrm](https://github.com/sapegin/mrm-tasks/tree/master/packages/mrm
   - [done() callback](#done-callback)
 - [Mocks](#mocks)
   - [Mock functions](#mock-functions-1)
-  - [Returning, resolving and rejecting values](#Returning-resolving-and-rejecting-values)
+  - [Returning, resolving and rejecting values](#returning-resolving-and-rejecting-values)
   - [Mock modules using `jest.mock` method](#mock-modules-using-jestmock-method)
   - [Mock modules using a mock file](#mock-modules-using-a-mock-file)
   - [Mock object methods](#mock-object-methods)
@@ -49,6 +49,7 @@ _I recommend [Mrm](https://github.com/sapegin/mrm-tasks/tree/master/packages/mrm
 - [Resources](#resources)
 - [You may also like](#you-may-also-like)
 - [Contributing](#contributing)
+- [Sponsoring](#sponsoring)
 - [Author and license](#author-and-license)
 
 <!-- tocstop -->
@@ -69,7 +70,7 @@ describe('makePoniesPink', () => {
   afterEach(() => {
     /* Runs after each test */
   })
-  
+
   test('make each pony pink', () => {
     const actual = fn(['Alice', 'Bob', 'Eve'])
     expect(actual).toEqual(['Pink Alice', 'Pink Bob', 'Pink Eve'])
@@ -79,7 +80,7 @@ describe('makePoniesPink', () => {
 
 ## Matchers
 
-[Using matchers](http://jestjs.io/docs/en/using-matchers), [matchers docs](https://facebook.github.io/jest/docs/expect.html)
+[Using matchers](http://jestjs.io/docs/en/using-matchers), [matchers docs](https://jestjs.io/docs/en/expect)
 
 ### Basic matchers
 
@@ -148,11 +149,11 @@ expect({ a: { b: 1 } }).toHaveProperty('a.b')
 expect({ a: 1, b: 2 }).toMatchObject({ a: 1 })
 expect({ a: 1, b: 2 }).toMatchObject({
   a: expect.any(Number),
-  b: expect.any(Number)
+  b: expect.any(Number),
 })
 expect([{ a: 1 }, { b: 2 }]).toEqual([
   expect.objectContaining({ a: expect.any(Number) }),
-  expect.anything()
+  expect.anything(),
 ])
 ```
 
@@ -177,7 +178,7 @@ expect(fn).toThrowErrorMatchingSnapshot()
 expect(node).toMatchSnapshot()
 // Jest 23+
 expect(user).toMatchSnapshot({
-  date: expect.any(Date)
+  date: expect.any(Date),
 })
 expect(user).toMatchInlineSnapshot()
 ```
@@ -197,7 +198,10 @@ expect(fn).toHaveReturnedTimes(2) // Function was returned without throwing an e
 expect(fn).toHaveReturnedWith(value) // Function returned a value (Jest 23+)
 expect(fn).toHaveLastReturnedWith(value) // Last function call returned a value (Jest 23+)
 expect(fn).toHaveNthReturnedWith(value) // Nth function call returned a value (Jest 23+)
-expect(fn.mock.calls).toEqual([['first', 'call', 'args'], ['second', 'call', 'args']]) // Multiple calls
+expect(fn.mock.calls).toEqual([
+  ['first', 'call', 'args'],
+  ['second', 'call', 'args'],
+]) // Multiple calls
 expect(fn.mock.calls[0][0]).toBe(2) // fn.mock.calls[0][0] — the first argument of the first call
 ```
 
@@ -244,11 +248,11 @@ test('resolve to lemon', async () => {
 })
 ```
 
-[resolves docs](https://facebook.github.io/jest/docs/en/expect.html#resolves)
+[resolves docs](https://jestjs.io/docs/en/expect#resolves)
 
 ## Async tests
 
-See [more examples](https://facebook.github.io/jest/docs/en/tutorial-async.html) in Jest docs.
+See [more examples](https://jestjs.io/docs/en/tutorial-async) in Jest docs.
 
 It’s a good practice to specify a number of expected assertions in async tests, so the test will fail if your assertions weren’t called at all.
 
@@ -261,10 +265,13 @@ test('async test', () => {
   // Your async tests
 })
 ```
+
 Note that you can also do this per file, outside any `describe` and `test`:
+
 ```js
 beforeEach(expect.hasAssertions)
 ```
+
 This will verify the presense of at least one assertion per test case. It also plays nice with more specific `expect.assertions(3)` declarations.
 
 ### async/await
@@ -284,7 +291,7 @@ _Return_ a Promise from your test:
 ```js
 test('async test', () => {
   expect.assertions(1)
-  return runAsyncOperation().then(result => {
+  return runAsyncOperation().then((result) => {
     expect(result).toBe(true)
   })
 })
@@ -295,7 +302,7 @@ test('async test', () => {
 Wrap your assertions in try/catch block, otherwise Jest will ignore failures:
 
 ```js
-test('async test', done => {
+test('async test', (done) => {
   expect.assertions(1)
   runAsyncOperation()
   setTimeout(() => {
@@ -321,7 +328,7 @@ test('call the callback', () => {
   expect(callback).toBeCalled()
   expect(callback.mock.calls[0][1].baz).toBe('pizza') // Second argument of the first call
   // Match the first and the last arguments but ignore the second argument
-  expect(callback).toHaveBeenLastCalledWith('meal', expect.anything(), 'margarita');
+  expect(callback).toHaveBeenLastCalledWith('meal', expect.anything(), 'margarita')
 })
 ```
 
@@ -345,37 +352,35 @@ And pass an implementation to `jest.fn` function:
 const callback = jest.fn(() => true)
 ```
 
-[Mock functions docs](https://facebook.github.io/jest/docs/mock-function-api.html)
+[Mock functions docs](https://jestjs.io/docs/en/mock-function-api)
 
 ### Returning, resolving and rejecting values
 
 Your mocks can return values:
 
 ```js
-const callback = jest.fn().mockReturnValue(true);
-const callbackOnce = jest.fn().mockReturnValueOnce(true);
+const callback = jest.fn().mockReturnValue(true)
+const callbackOnce = jest.fn().mockReturnValueOnce(true)
 ```
 
 Or resolve values:
 
 ```js
-const promise = jest.fn().mockResolvedValue(true);
-const promiseOnce = jest.fn().mockResolvedValueOnce(true);
+const promise = jest.fn().mockResolvedValue(true)
+const promiseOnce = jest.fn().mockResolvedValueOnce(true)
 ```
 
 They can even reject values:
 
 ```js
-const failedPromise = jest.fn().mockRejectedValue("Error");
-const failedPromiseOnce = jest.fn().mockRejectedValueOnce("Error");
+const failedPromise = jest.fn().mockRejectedValue('Error')
+const failedPromiseOnce = jest.fn().mockRejectedValueOnce('Error')
 ```
 
 You can even combine these:
 
 ```js
-const callback = jest.fn()
-  .mockReturnValueOnce(false)
-  .mockReturnValue(true);
+const callback = jest.fn().mockReturnValueOnce(false).mockReturnValue(true)
 
 // ->
 //  call 1: false
@@ -385,11 +390,11 @@ const callback = jest.fn()
 ### Mock modules using `jest.mock` method
 
 ```js
-jest.mock('lodash/memoize', () => a => a) // The original lodash/memoize should exist
-jest.mock('lodash/memoize', () => a => a, { virtual: true }) // The original lodash/memoize isn’t required
+jest.mock('lodash/memoize', () => (a) => a) // The original lodash/memoize should exist
+jest.mock('lodash/memoize', () => (a) => a, { virtual: true }) // The original lodash/memoize isn’t required
 ```
 
-[jest.mock docs](https://facebook.github.io/jest/docs/jest-object.html#jestmockmodulename-factory-options)
+[jest.mock docs](https://jestjs.io/docs/en/jest-object#jestmockmodulename-factory-options)
 
 > Note: When using `babel-jest`, calls to `jest.mock` will automatically be hoisted to the top of the code block. Use `jest.doMock` if you want to explicitly avoid this behavior.
 
@@ -398,7 +403,7 @@ jest.mock('lodash/memoize', () => a => a, { virtual: true }) // The original lod
 1.  Create a file like `__mocks__/lodash/memoize.js`:
 
     ```js
-    module.exports = a => a
+    module.exports = (a) => a
     ```
 
 2.  Add to your test:
@@ -409,7 +414,7 @@ jest.mock('lodash/memoize', () => a => a, { virtual: true }) // The original lod
 
 > Note: When using `babel-jest`, calls to `jest.mock` will automatically be hoisted to the top of the code block. Use `jest.doMock` if you want to explicitly avoid this behavior.
 
-[Manual mocks docs](https://facebook.github.io/jest/docs/manual-mocks.html)
+[Manual mocks docs](https://jestjs.io/docs/en/manual-mocks)
 
 ### Mock object methods
 
@@ -441,7 +446,7 @@ const setTitle = jest.fn()
 const location = {}
 Object.defineProperty(location, 'title', {
   get: getTitle,
-  set: setTitle
+  set: setTitle,
 })
 ```
 
@@ -483,13 +488,13 @@ jest.useFakeTimers()
 
 test('kill the time', () => {
   const callback = jest.fn()
-  
+
   // Run some code that uses setTimeout or setInterval
   const actual = someFunctionThatUseTimers(callback)
-  
+
   // Fast-forward until all timers have been executed
   jest.runAllTimers()
-  
+
   // Check the results synchronously
   expect(callback).toHaveBeenCalledTimes(1)
 })
@@ -503,13 +508,13 @@ jest.useFakeTimers()
 
 test('kill the time', () => {
   const callback = jest.fn()
-  
+
   // Run some code that uses setTimeout or setInterval
   const actual = someFunctionThatUseTimers(callback)
-  
+
   // Fast-forward for 250 ms
   jest.advanceTimersByTime(250)
-  
+
   // Check the results synchronously
   expect(callback).toHaveBeenCalledTimes(1)
 })
@@ -524,7 +529,11 @@ Use [jest.runOnlyPendingTimers()](https://jestjs.io/docs/en/timer-mocks#run-pend
 Run the same test with different data:
 
 ```js
-test.each([[1, 1, 2], [1, 2, 3], [2, 1, 3]])('.add(%s, %s)', (a, b, expected) => {
+test.each([
+  [1, 1, 2],
+  [1, 2, 3],
+  [2, 1, 3],
+])('.add(%s, %s)', (a, b, expected) => {
   expect(a + b).toBe(expected)
 })
 ```
@@ -542,17 +551,17 @@ test.each`
 })
 ```
 
-Or on `describe` level: 
+Or on `describe` level:
 
 ```js
 describe.each([['mobile'], ['tablet'], ['desktop']])('checkout flow on %s', (viewport) => {
   test('displays success page', () => {
-    // 
+    //
   })
 })
 ```
 
-[describe.each() docs](https://jestjs.io/docs/en/api.html#describeeachtablename-fn-timeout), [test.each() docs](https://jestjs.io/docs/en/api.html#testeachtablename-fn-timeout), 
+[describe.each() docs](https://jestjs.io/docs/en/api#describeeachtablename-fn-timeout), [test.each() docs](https://jestjs.io/docs/en/api#testeachtablename-fn-timeout),
 
 ## Skipping tests
 
