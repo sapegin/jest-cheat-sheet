@@ -80,7 +80,7 @@ describe('makePoniesPink', () => {
 
 ## Matchers
 
-[Using matchers](http://jestjs.io/docs/en/using-matchers), [matchers docs](https://facebook.github.io/jest/docs/expect.html)
+[Using matchers](http://jestjs.io/docs/en/using-matchers), [matchers docs](https://jestjs.io/docs/en/expect)
 
 ### Basic matchers
 
@@ -248,11 +248,11 @@ test('resolve to lemon', async () => {
 })
 ```
 
-[resolves docs](https://facebook.github.io/jest/docs/en/expect.html#resolves)
+[resolves docs](https://jestjs.io/docs/en/expect#resolves)
 
 ## Async tests
 
-See [more examples](https://facebook.github.io/jest/docs/en/tutorial-async.html) in Jest docs.
+See [more examples](https://jestjs.io/docs/en/tutorial-async) in Jest docs.
 
 It’s a good practice to specify a number of expected assertions in async tests, so the test will fail if your assertions weren’t called at all.
 
@@ -352,7 +352,7 @@ And pass an implementation to `jest.fn` function:
 const callback = jest.fn(() => true)
 ```
 
-[Mock functions docs](https://facebook.github.io/jest/docs/mock-function-api.html)
+[Mock functions docs](https://jestjs.io/docs/en/mock-function-api)
 
 ### Returning, resolving and rejecting values
 
@@ -394,7 +394,7 @@ jest.mock('lodash/memoize', () => (a) => a) // The original lodash/memoize shoul
 jest.mock('lodash/memoize', () => (a) => a, { virtual: true }) // The original lodash/memoize isn’t required
 ```
 
-[jest.mock docs](https://facebook.github.io/jest/docs/jest-object.html#jestmockmodulename-factory-options)
+[jest.mock docs](https://jestjs.io/docs/en/jest-object#jestmockmodulename-factory-options)
 
 > Note: When using `babel-jest`, calls to `jest.mock` will automatically be hoisted to the top of the code block. Use `jest.doMock` if you want to explicitly avoid this behavior.
 
@@ -414,7 +414,7 @@ jest.mock('lodash/memoize', () => (a) => a, { virtual: true }) // The original l
 
 > Note: When using `babel-jest`, calls to `jest.mock` will automatically be hoisted to the top of the code block. Use `jest.doMock` if you want to explicitly avoid this behavior.
 
-[Manual mocks docs](https://facebook.github.io/jest/docs/manual-mocks.html)
+[Manual mocks docs](https://jestjs.io/docs/en/manual-mocks)
 
 ### Mock object methods
 
@@ -561,7 +561,7 @@ describe.each([['mobile'], ['tablet'], ['desktop']])('checkout flow on %s', (vie
 })
 ```
 
-[describe.each() docs](https://jestjs.io/docs/en/api.html#describeeachtablename-fn-timeout), [test.each() docs](https://jestjs.io/docs/en/api.html#testeachtablename-fn-timeout),
+[describe.each() docs](https://jestjs.io/docs/en/api#describeeachtablename-fn-timeout), [test.each() docs](https://jestjs.io/docs/en/api#testeachtablename-fn-timeout),
 
 ## Skipping tests
 
