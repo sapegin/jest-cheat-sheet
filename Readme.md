@@ -1,6 +1,6 @@
 <div align="center" markdown="1">
 
-<img src="https://github.com/facebook/jest/raw/master/website/static/img/jest.png" width="200">
+<img src="https://raw.githubusercontent.com/facebook/jest/main/website/static/img/jest-readme-headline.png" width="200">
 
 <h1>Jest cheat sheet</h1>
 
