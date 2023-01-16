@@ -274,7 +274,7 @@ beforeEach(expect.hasAssertions)
 
 This will verify the presense of at least one assertion per test case. It also plays nice with more specific `expect.assertions(3)` declarations.
 
-In addition, you can enforce it globally, across all test files (instead of having to repeat per file) by adding the exact same line into one of the scripts which the `setupFilesAfterEnv` configuration option references. (In most projects that file is `setupTests.ts` and is referenced via a `setupFilesAfterEnv: ['<rootDir>/setupTests.ts']` entry in `jest.config.ts`.)
+In addition, you can enforce it globally, across all test files (instead of having to repeat per file) by adding the exact same line into one of the scripts referenced by the `setupFilesAfterEnv` configuration option. (For example, `setupTests.ts` and that is referenced via a `setupFilesAfterEnv: ['<rootDir>/setupTests.ts']` entry in `jest.config.ts`.)
 
 ### async/await
 
