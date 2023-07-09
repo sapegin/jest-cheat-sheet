@@ -95,7 +95,7 @@ expect({ a: undefined, b: 2 }).not.toStrictEqual({ b: 2 }) // Strict equality (J
 ### Truthiness
 
 ```js
-// Matches anything that an if statement treats as true (not false, 0, '', null, undefined, NaN)
+// Matches anything that an if statement treats as true (true, 1, 'hello', {}, [], 5.3)
 expect('foo').toBeTruthy()
 // Matches anything that an if statement treats as false (false, 0, '', null, undefined, NaN)
 expect('').toBeFalsy()
